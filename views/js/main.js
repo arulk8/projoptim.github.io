@@ -418,45 +418,31 @@ var resizePizzas = function(size) {
         console.log("bug in changeSliderLabel");
     }
   }
-
   changeSliderLabel(size);
-
    // Returns the size difference to change a pizza element from one size to another. Called by changePizzaSlices(size).
-  function determineDx (elem, size) {
-    var oldWidth = elem.offsetWidth;
-    var windowWidth = document.querySelector("#randomPizzas").offsetWidth;
-    var oldSize = oldWidth / windowWidth;
-
     // Changes the slider value to a percent width
-    function sizeSwitcher (size) {
+    function changePizzaSizes (size) {
       switch(size) {
         case "1":
-          return 0.25;
+          newWidth= 25;
+          break;
         case "2":
-          return 0.3333;
+         newWidth= 33.3;
+         break;
         case "3":
-          return 0.5;
+         newWidth= 50;
+         break;
         default:
           console.log("bug in sizeSwitcher");
       }
-    }
-
-    var newSize = sizeSwitcher(size);
-    var dx = (newSize - oldSize) * windowWidth;
-
-    return dx;
-  }
-
+  
+  var randpizza =document.getElementsByClassName("randomPizzaContainer");
   // Iterates through pizza elements on the page and changes their widths
-  function changePizzaSizes(size) {
-    for (var i = 0; i < document.getElementsByClassName("randomPizzaContainer").length; i++) {
-      var dx = determineDx(document.getElementsByClassName("randomPizzaContainer")[i], size);
-      var newwidth = (document.getElementsByClassName("randomPizzaContainer")[i].offsetWidth + dx) + 'px';
-      document.getElementsByClassName("randomPizzaContainer")[i].style.width = newwidth;
+  for (var i = 0; i < randpizza.length; i++) {
+      randpizza[i].style.width = newWidth + "%";
     }
   }
-
-  changePizzaSizes(size);
+ changePizzaSizes(size);
 
   // User Timing API is awesome
   window.performance.mark("mark_end_resize");
@@ -497,13 +483,14 @@ function logAverageFrame(times) {   // times is the array of User Timing measure
 // https://www.igvita.com/slides/2012/devtools-tips-and-tricks/jank-demo.html
 
 // Moves the sliding background pizzas based on scroll position
+
+
+var items = document.getElementsByClassName('mover');
+
+
 function updatePositions() {
   frame++;
   window.performance.mark("mark_start_frame");
-
-  
-
-  var items = document.getElementsByClassName('mover');
 
   var phasearry=[];
   for(var i=0 ;i<5;i++)
@@ -516,6 +503,7 @@ function updatePositions() {
     var phase = phasearry[i % 5];
 
     items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
+     
   }
 
   // User Timing API to the rescue again. Seriously, it's worth learning.
