@@ -493,6 +493,7 @@ function updatePositions() {
   window.performance.mark("mark_start_frame");
 
   var phasearry=[];
+  //stored the phase value in this array
   for(var i=0 ;i<5;i++)
   {
   phasearry[i]= Math.sin((document.body.scrollTop / 1250)+ i);
