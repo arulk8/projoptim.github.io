@@ -435,7 +435,7 @@ var resizePizzas = function(size) {
         default:
           console.log("bug in sizeSwitcher");
       }
-  
+  //optimized loop for resizing pizza when sliderbar is moved.
   var randpizza =document.getElementsByClassName("randomPizzaContainer");
   // Iterates through pizza elements on the page and changes their widths
   for (var i = 0; i < randpizza.length; i++) {
